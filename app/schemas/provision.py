@@ -13,7 +13,7 @@ class ProvisionRequest(BaseModel):
     @field_validator("variables")
     @classmethod
     def check_no_injection(cls, v):
-        dangerous = [";", "", ":", "<", ">", ",", "$", "?", "|"]
+        dangerous = [";", "<", ">", ",", "$", "?", "|"]
         for key, val in v.items():
             if any(c in val for c in dangerous):
                 raise ValueError(f"Injection detected in {key}")
